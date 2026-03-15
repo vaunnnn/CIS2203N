@@ -10,6 +10,11 @@ android {
         }
     }
 
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
+
     defaultConfig {
         applicationId = "com.example.campuspassword"
         minSdk = 24
@@ -44,3 +49,4 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
 }
+

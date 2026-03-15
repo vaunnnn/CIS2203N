@@ -1,24 +1,43 @@
 package com.example.campuspassword;
 
+import android.graphics.Color;
 import android.os.Bundle;
-
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+import com.example.campuspassword.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
+    private ActivityMainBinding binding;
+    private String BACKGROUNDCOLOROFTHEROOMWALL = "Cream";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        binding.submitBtn.setOnClickListener(v -> validateLogin());
+    }
+
+    public void validateLogin () {
+
+        String studentID = binding.studentID.getText().toString().trim();
+        String password = binding.password.getText().toString().trim();
+
+        if(studentID.length() < 2) {
+            binding.result.setText("Invalid Input!");
+            binding.result.setTextColor(Color.RED);
+            return;
+        }
+
+        String lastTwoDigits = studentID.substring(studentID.length() - 2);
+        String correctPassword = BACKGROUNDCOLOROFTHEROOMWALL + lastTwoDigits;
+
+        if(password.equals(correctPassword)) {
+            binding.result.setText("Access Granted!");
+            binding.result.setTextColor(Color.GREEN);
+        } else {
+            binding.result.setText("Access Denied!");
+            binding.result.setTextColor(Color.RED);
+        }
+
     }
 }
