@@ -2,4 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="output_color">#FFFBF1</color>
+    <color name="input_color">#FFF2D0</color>
+    <color name="number_color">#F2D479</color>
+    <color name="operator_color">#E36A6A</color>
+    <color name="reset_color">#4C8CE4</color>
+    <color name="grey_color">#BFC6C4</color>
 </resources>

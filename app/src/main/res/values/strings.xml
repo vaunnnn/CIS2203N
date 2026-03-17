@@ -2,4 +2,22 @@
     <string name="app_name">Calculator App</string>
     <string name="result_text">0</string>
     <string name="input_text">0</string>
+    <string name="num1_text">1</string>
+    <string name="num2_text">2</string>
+    <string name="num3_text">3</string>
+    <string name="num4_text">4</string>
+    <string name="num5_text">5</string>
+    <string name="num6_text">6</string>
+    <string name="num7_text">7</string>
+    <string name="num8_text">8</string>
+    <string name="num9_text">9</string>
+    <string name="num0_text">0</string>
+    <string name="dot_text">.</string>
+    <string name="remove_text">x</string>
+    <string name="addOperand_text">+</string>
+    <string name="subtractOperand_text">-</string>
+    <string name="multiplyOperand_text">*</string>
+    <string name="divideOperand_text">/</string>
+    <string name="equals_text">=</string>
+    <string name="reset_text">AC</string>
 </resources>

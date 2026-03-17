@@ -11,13 +11,13 @@
     <TextView
         android:id="@+id/result"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
-        android:background="@color/material_dynamic_neutral80"
+        android:layout_height="230dp"
+        android:background="@color/output_color"
         android:gravity="end|bottom"
         android:padding="8dp"
         android:text="@string/result_text"
-        android:textSize="100sp"
-        android:textColor="@color/white"
+        android:textColor="@color/grey_color"
+        android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -25,204 +25,291 @@
     <TextView
         android:id="@+id/input"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
-        android:background="@color/black"
-        android:gravity="bottom"
-        android:padding="8dp"
+        android:layout_height="140dp"
+        android:background="@color/output_color"
+        android:gravity="end|top"
+        android:padding="3dp"
         android:text="@string/input_text"
-        android:textSize="70sp"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
+        android:textSize="90sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/result" />
 
     <Button
-        android:id="@+id/num1"
+        android:id="@+id/resetButton"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:text="1"
-        android:textSize="50sp"
         android:layout_marginStart="2dp"
+        android:backgroundTint="@color/reset_color"
+        android:text="@string/reset_text"
+        android:textColor="@color/black"
+        android:textSize="39sp"
         app:cornerRadius="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input" />
 
     <Button
-        android:id="@+id/num2"
+        android:id="@+id/magic"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:text="1"
-        android:textSize="50sp"
         android:layout_marginStart="2dp"
+        android:backgroundTint="@color/operator_color"
+        android:text=":)"
+        android:textColor="@color/black"
+        android:textSize="50sp"
         app:cornerRadius="0dp"
-        app:layout_constraintStart_toEndOf="@+id/num1"
+        app:layout_constraintStart_toEndOf="@+id/resetButton"
         app:layout_constraintTop_toBottomOf="@+id/input" />
 
     <Button
-        android:id="@+id/num3"
+        android:id="@+id/percentBtn"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:text="1"
-        android:textSize="50sp"
         android:layout_marginStart="2dp"
+        android:backgroundTint="@color/operator_color"
+        android:text="%"
+        android:textColor="@color/black"
+        android:textSize="50sp"
         app:cornerRadius="0dp"
-        app:layout_constraintStart_toEndOf="@+id/num2"
+        app:layout_constraintStart_toEndOf="@+id/magic"
         app:layout_constraintTop_toBottomOf="@+id/input" />
 
     <Button
-        android:id="@+id/num4"
+        android:id="@+id/divideBtn"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:text="1"
-        android:textSize="50sp"
         android:layout_marginStart="2dp"
+        android:backgroundTint="@color/operator_color"
+        android:text="@string/divideOperand_text"
+        android:textColor="@color/black"
+        android:textSize="50sp"
         app:cornerRadius="0dp"
-        app:layout_constraintStart_toEndOf="@+id/num3"
+        app:layout_constraintStart_toEndOf="@+id/percentBtn"
         app:layout_constraintTop_toBottomOf="@+id/input" />
-
-    <Button
-        android:id="@+id/num5"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:text="1"
-        android:textSize="50sp"
-        android:layout_marginStart="2dp"
-        android:insetTop="0dp"
-        app:cornerRadius="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/num1" />
-
-    <Button
-        android:id="@+id/num6"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:text="1"
-        android:textSize="50sp"
-        android:layout_marginStart="2dp"
-        android:insetTop="0dp"
-        app:cornerRadius="0dp"
-        app:layout_constraintStart_toEndOf="@+id/num5"
-        app:layout_constraintTop_toBottomOf="@+id/num2" />
 
     <Button
         android:id="@+id/num7"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:text="1"
-        android:textSize="50sp"
         android:layout_marginStart="2dp"
+        android:backgroundTint="@color/number_color"
         android:insetTop="0dp"
+        android:text="@string/num7_text"
+        android:textColor="@color/black"
+        android:textSize="50sp"
         app:cornerRadius="0dp"
-        app:layout_constraintStart_toEndOf="@+id/num6"
-        app:layout_constraintTop_toBottomOf="@+id/num3" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/resetButton" />
 
     <Button
         android:id="@+id/num8"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:text="1"
-        android:textSize="50sp"
         android:layout_marginStart="2dp"
+        android:backgroundTint="@color/number_color"
         android:insetTop="0dp"
+        android:text="@string/num8_text"
+        android:textColor="@color/black"
+        android:textSize="50sp"
         app:cornerRadius="0dp"
         app:layout_constraintStart_toEndOf="@+id/num7"
-        app:layout_constraintTop_toBottomOf="@+id/num4" />
+        app:layout_constraintTop_toBottomOf="@+id/magic" />
 
     <Button
         android:id="@+id/num9"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:text="1"
-        android:textSize="50sp"
         android:layout_marginStart="2dp"
+        android:backgroundTint="@color/number_color"
         android:insetTop="0dp"
+        android:text="@string/num9_text"
+        android:textColor="@color/black"
+        android:textSize="50sp"
         app:cornerRadius="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/num5" />
+        app:layout_constraintStart_toEndOf="@+id/num8"
+        app:layout_constraintTop_toBottomOf="@+id/percentBtn" />
 
     <Button
-        android:id="@+id/num10"
+        android:id="@+id/multiplyBtn"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:text="1"
-        android:textSize="50sp"
         android:layout_marginStart="2dp"
+        android:backgroundTint="@color/operator_color"
         android:insetTop="0dp"
+        android:text="@string/multiplyOperand_text"
+        android:textColor="@color/black"
+        android:textSize="50sp"
         app:cornerRadius="0dp"
         app:layout_constraintStart_toEndOf="@+id/num9"
-        app:layout_constraintTop_toBottomOf="@+id/num6" />
+        app:layout_constraintTop_toBottomOf="@+id/divideBtn" />
 
     <Button
-        android:id="@+id/num11"
+        android:id="@+id/num4"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:text="1"
-        android:textSize="50sp"
         android:layout_marginStart="2dp"
+        android:backgroundTint="@color/number_color"
         android:insetTop="0dp"
+        android:text="@string/num4_text"
+        android:textColor="@color/black"
+        android:textSize="50sp"
         app:cornerRadius="0dp"
-        app:layout_constraintStart_toEndOf="@+id/num10"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/num7" />
 
     <Button
-        android:id="@+id/num12"
+        android:id="@+id/num5"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:text="1"
-        android:textSize="50sp"
         android:layout_marginStart="2dp"
+        android:backgroundTint="@color/number_color"
         android:insetTop="0dp"
+        android:text="@string/num5_text"
+        android:textColor="@color/black"
+        android:textSize="50sp"
         app:cornerRadius="0dp"
-        app:layout_constraintStart_toEndOf="@+id/num11"
+        app:layout_constraintStart_toEndOf="@+id/num4"
         app:layout_constraintTop_toBottomOf="@+id/num8" />
 
     <Button
-        android:id="@+id/num13"
+        android:id="@+id/num6"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:text="1"
-        android:textSize="50sp"
         android:layout_marginStart="2dp"
+        android:backgroundTint="@color/number_color"
         android:insetTop="0dp"
+        android:text="@string/num6_text"
+        android:textColor="@color/black"
+        android:textSize="50sp"
         app:cornerRadius="0dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/num5"
         app:layout_constraintTop_toBottomOf="@+id/num9" />
 
     <Button
-        android:id="@+id/num14"
+        android:id="@+id/subtractBtn"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:text="1"
-        android:textSize="50sp"
         android:layout_marginStart="2dp"
+        android:backgroundTint="@color/operator_color"
         android:insetTop="0dp"
+        android:text="@string/subtractOperand_text"
+        android:textColor="@color/black"
+        android:textSize="50sp"
         app:cornerRadius="0dp"
-        app:layout_constraintStart_toEndOf="@+id/num13"
-        app:layout_constraintTop_toBottomOf="@+id/num10" />
+        app:layout_constraintStart_toEndOf="@+id/num6"
+        app:layout_constraintTop_toBottomOf="@+id/multiplyBtn" />
 
     <Button
-        android:id="@+id/num15"
+        android:id="@+id/num1"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:text="1"
-        android:textSize="50sp"
         android:layout_marginStart="2dp"
+        android:backgroundTint="@color/number_color"
         android:insetTop="0dp"
+        android:text="@string/num1_text"
+        android:textColor="@color/black"
+        android:textSize="50sp"
         app:cornerRadius="0dp"
-        app:layout_constraintStart_toEndOf="@+id/num14"
-        app:layout_constraintTop_toBottomOf="@+id/num11" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/num4" />
 
     <Button
-        android:id="@+id/num16"
+        android:id="@+id/num2"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:text="1"
-        android:textSize="50sp"
         android:layout_marginStart="2dp"
+        android:backgroundTint="@color/number_color"
         android:insetTop="0dp"
+        android:text="@string/num2_text"
+        android:textColor="@color/black"
+        android:textSize="50sp"
         app:cornerRadius="0dp"
-        app:layout_constraintStart_toEndOf="@+id/num15"
-        app:layout_constraintTop_toBottomOf="@+id/num12" />
+        app:layout_constraintStart_toEndOf="@+id/num1"
+        app:layout_constraintTop_toBottomOf="@+id/num5" />
+
+    <Button
+        android:id="@+id/num3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="2dp"
+        android:backgroundTint="@color/number_color"
+        android:insetTop="0dp"
+        android:text="@string/num3_text"
+        android:textColor="@color/black"
+        android:textSize="50sp"
+        app:cornerRadius="0dp"
+        app:layout_constraintStart_toEndOf="@+id/num2"
+        app:layout_constraintTop_toBottomOf="@+id/num6" />
+
+    <Button
+        android:id="@+id/addBtn"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="2dp"
+        android:backgroundTint="@color/operator_color"
+        android:insetTop="0dp"
+        android:text="@string/addOperand_text"
+        android:textColor="@color/black"
+        android:textSize="50sp"
+        app:cornerRadius="0dp"
+        app:layout_constraintStart_toEndOf="@+id/num3"
+        app:layout_constraintTop_toBottomOf="@+id/subtractBtn" />
+
+    <Button
+        android:id="@+id/num0"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="2dp"
+        android:backgroundTint="@color/number_color"
+        android:insetTop="0dp"
+        android:text="@string/num0_text"
+        android:textColor="@color/black"
+        android:textSize="50sp"
+        app:cornerRadius="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/num1" />
+
+    <Button
+        android:id="@+id/dotBtn"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="2dp"
+        android:backgroundTint="@color/number_color"
+        android:insetTop="0dp"
+        android:text="@string/dot_text"
+        android:textColor="@color/black"
+        android:textSize="50sp"
+        app:cornerRadius="0dp"
+        app:layout_constraintStart_toEndOf="@+id/num0"
+        app:layout_constraintTop_toBottomOf="@+id/num2" />
+
+    <Button
+        android:id="@+id/removeBtn"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="2dp"
+        android:backgroundTint="@color/number_color"
+        android:insetTop="0dp"
+        android:text="@string/remove_text"
+        android:textColor="@color/black"
+        android:textSize="50sp"
+        app:cornerRadius="0dp"
+        app:layout_constraintStart_toEndOf="@+id/dotBtn"
+        app:layout_constraintTop_toBottomOf="@+id/num3" />
+
+    <Button
+        android:id="@+id/equalBtn"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="2dp"
+        android:backgroundTint="@color/operator_color"
+        android:insetTop="0dp"
+        android:text="@string/equals_text"
+        android:textColor="@color/black"
+        android:textSize="50sp"
+        app:cornerRadius="0dp"
+        app:layout_constraintStart_toEndOf="@+id/removeBtn"
+        app:layout_constraintTop_toBottomOf="@+id/addBtn" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
