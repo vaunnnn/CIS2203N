@@ -18,6 +18,8 @@
     <string name="subtractOperand_text">-</string>
     <string name="multiplyOperand_text">*</string>
     <string name="divideOperand_text">/</string>
+    <string name="moduloOperand_text">%</string>
+    <string name="magic_text">:)</string>
     <string name="equals_text">=</string>
     <string name="reset_text">AC</string>
 </resources>

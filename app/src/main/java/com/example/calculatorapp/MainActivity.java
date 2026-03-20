@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private String currentOperator = "";
     private boolean isFirstInput = true;
     private boolean isEqualsPressed = false;
+    private String lastThreeDigitsOfIDNumber = "4.36";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,13 +38,16 @@ public class MainActivity extends AppCompatActivity {
             appendNumberToInput(numberStr);
         };
 
+        //Function to handle magic number
+        View.OnClickListener magicClickListener = view -> {
+            appendNumberToInput(lastThreeDigitsOfIDNumber);
+        };
+
         //Function to handle the reset
         View.OnClickListener resetClickListener = view -> {
             resetInput();
             resetResult();
-            runningTotal = 0;
-            currentOperator = "";
-            isFirstInput = true;
+            resetCalc();
         };
 
         //Function to handle the operands and output the current input + the operand in the "result"
@@ -65,6 +70,17 @@ public class MainActivity extends AppCompatActivity {
 
         View.OnClickListener equalsClickListener = view -> {
             String inputStr = getCurrentInput();
+
+            if(isDivisionByZero(inputStr)) {
+                setInputText("DNE");
+                return;
+            } else if (isEqualsPressedWithoutAnInput(inputStr) || isUndefined(inputStr)) {
+                resetInput();
+                resetResult();
+                resetCalc();
+                return;
+            }
+
             finalizeCalculation(inputStr);
             isEqualsPressed = true;
         };
@@ -81,6 +97,10 @@ public class MainActivity extends AppCompatActivity {
         binding.num7.setOnClickListener(numberClickListener);
         binding.num8.setOnClickListener(numberClickListener);
         binding.num9.setOnClickListener(numberClickListener);
+        binding.dotBtn.setOnClickListener(numberClickListener);
+
+        //Magic event listener
+        binding.magic.setOnClickListener(magicClickListener);
 
         //Reset event listener
         binding.resetButton.setOnClickListener(resetClickListener);
@@ -90,14 +110,15 @@ public class MainActivity extends AppCompatActivity {
         binding.subtractBtn.setOnClickListener(operandClickListener);
         binding.multiplyBtn.setOnClickListener(operandClickListener);
         binding.divideBtn.setOnClickListener(operandClickListener);
+        binding.moduloBtn.setOnClickListener(operandClickListener);
 
         //Remove Number event listener
         binding.removeBtn.setOnClickListener(removeClickListener);
 
         //Equal event listener
         binding.equalBtn.setOnClickListener(equalsClickListener);
-    }
 
+    }
 
     private void appendNumberToInput(String number) {
         String currentText = binding.input.getText().toString();
@@ -105,7 +126,10 @@ public class MainActivity extends AppCompatActivity {
         if(currentText.equals("0")) {
             String firstText = number;
             setInputText(firstText);
-        } else {
+        } else if (currentText.equals(":)")){
+            String newText = lastThreeDigitsOfIDNumber + number;
+            setInputText(newText);
+        }else {
             String newText = currentText + number;
             setInputText(newText);
         }
@@ -148,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
             case "+": runningTotal += newNumber; break;
             case "-": runningTotal -= newNumber; break;
             case "*": runningTotal *= newNumber; break;
+            case "%": runningTotal %= newNumber; break;
             case "/":
                 if (newNumber != 0) runningTotal /= newNumber;
                 break;
@@ -161,7 +186,6 @@ public class MainActivity extends AppCompatActivity {
 
         return number.substring(0, number.length() - 1);
     }
-
 
     private String getCurrentResult() {
         if(binding.result.getText().toString().equals("0")) {
@@ -178,6 +202,12 @@ public class MainActivity extends AppCompatActivity {
         binding.input.setText("0");
     }
 
+    private void resetCalc() {
+        runningTotal = 0;
+        currentOperator = "";
+        isFirstInput = true;
+    }
+
     private void resetResult() {
         binding.result.setText("0");
     }
@@ -190,12 +220,23 @@ public class MainActivity extends AppCompatActivity {
         binding.result.setText(number);
     }
 
+    private boolean isDivisionByZero(String inputStr) {
+        return inputStr.equals("0") && currentOperator.equals("/");
+    }
+
+    private  boolean isEqualsPressedWithoutAnInput(String inputStr) {
+        return inputStr.equals("0");
+    }
+
+    private boolean isUndefined(String inputStr) {
+        return inputStr.equals("DNE");
+    }
 
     @SuppressLint("DefaultLocale")
     private String formatNumber(double d) {
         if (d == (long) d)
-            return String.format("%d", (long) d);
+            return String.format("%d", (int) d);
         else
-            return String.format("%s", d);
+            return String.format("%.2f", d);
     }
 }

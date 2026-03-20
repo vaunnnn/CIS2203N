@@ -54,7 +54,7 @@
         android:layout_height="100dp"
         android:layout_marginStart="2dp"
         android:backgroundTint="@color/operator_color"
-        android:text=":)"
+        android:text="@string/magic_text"
         android:textColor="@color/black"
         android:textSize="50sp"
         app:cornerRadius="0dp"
@@ -62,12 +62,12 @@
         app:layout_constraintTop_toBottomOf="@+id/input" />
 
     <Button
-        android:id="@+id/percentBtn"
+        android:id="@+id/moduloBtn"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_marginStart="2dp"
         android:backgroundTint="@color/operator_color"
-        android:text="%"
+        android:text="@string/moduloOperand_text"
         android:textColor="@color/black"
         android:textSize="50sp"
         app:cornerRadius="0dp"
@@ -84,7 +84,7 @@
         android:textColor="@color/black"
         android:textSize="50sp"
         app:cornerRadius="0dp"
-        app:layout_constraintStart_toEndOf="@+id/percentBtn"
+        app:layout_constraintStart_toEndOf="@+id/moduloBtn"
         app:layout_constraintTop_toBottomOf="@+id/input" />
 
     <Button
@@ -127,7 +127,7 @@
         android:textSize="50sp"
         app:cornerRadius="0dp"
         app:layout_constraintStart_toEndOf="@+id/num8"
-        app:layout_constraintTop_toBottomOf="@+id/percentBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/moduloBtn" />
 
     <Button
         android:id="@+id/multiplyBtn"
