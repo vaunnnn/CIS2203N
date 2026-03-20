@@ -8,4 +8,13 @@
     <color name="operator_color">#E36A6A</color>
     <color name="reset_color">#4C8CE4</color>
     <color name="grey_color">#BFC6C4</color>
+    <color name="color_main_bg">#121212</color>
+    <color name="color_display_bg">#1C1C1E</color>
+    <color name="color_num_bg">#2C2C2E</color>
+    <color name="color_num_text">#FFFFFF</color>
+    <color name="color_operator_bg">#36513A</color>
+    <color name="color_operator_text">#D7EDDB</color>
+    <color name="color_display_text">#FFFFFF</color>
+    <color name="color_equals_bg">#5EB47C</color>
+    <color name="color_equals_text">#000000</color>
 </resources>

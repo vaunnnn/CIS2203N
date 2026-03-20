@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private String currentOperator = "";
     private boolean isFirstInput = true;
     private boolean isEqualsPressed = false;
-    private String lastThreeDigitsOfIDNumber = "4.36";
+    private final String lastThreeDigitsOfIDNumber = "4.36";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +36,13 @@ public class MainActivity extends AppCompatActivity {
             String numberStr = clickedBtn.getText().toString();
 
             appendNumberToInput(numberStr);
+        };
+
+        //Function to handle decimal numbers;
+        View.OnClickListener decimalClickListener = view -> {
+            if(!isDecimalExist()) {
+                appendNumberToInput(".");
+            }
         };
 
         //Function to handle magic number
@@ -62,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         View.OnClickListener removeClickListener = view -> {
             String currentNumber = getCurrentInput();
 
-            if(!currentNumber.isEmpty() && !currentNumber.equals("0")) {
+            if(!currentNumber.isEmpty() && !isCurrentInputZero()) {
                 String updatedNumber = removeNumberFromInput(currentNumber);
                 setInputText(updatedNumber);
             }
@@ -97,7 +104,9 @@ public class MainActivity extends AppCompatActivity {
         binding.num7.setOnClickListener(numberClickListener);
         binding.num8.setOnClickListener(numberClickListener);
         binding.num9.setOnClickListener(numberClickListener);
-        binding.dotBtn.setOnClickListener(numberClickListener);
+
+        //Decimal event listener
+        binding.dotBtn.setOnClickListener(decimalClickListener);
 
         //Magic event listener
         binding.magic.setOnClickListener(magicClickListener);
@@ -121,18 +130,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void appendNumberToInput(String number) {
-        String currentText = binding.input.getText().toString();
 
-        if(currentText.equals("0")) {
-            String firstText = number;
-            setInputText(firstText);
-        } else if (currentText.equals(":)")){
-            String newText = lastThreeDigitsOfIDNumber + number;
-            setInputText(newText);
-        }else {
-            String newText = currentText + number;
-            setInputText(newText);
+        String currentText = getCurrentInput();
+        if(isCurrentInputZero()) {
+            if (number.equals(".")) {
+                setInputText("0.");
+            } else {
+                setInputText(number);
+            }
+            return;
         }
+        String newText = currentText + number;
+        setInputText(newText);
     }
 
     private void handleOperator(String nextOperator) {
@@ -206,6 +215,7 @@ public class MainActivity extends AppCompatActivity {
         runningTotal = 0;
         currentOperator = "";
         isFirstInput = true;
+        isEqualsPressed = false;
     }
 
     private void resetResult() {
@@ -221,21 +231,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean isDivisionByZero(String inputStr) {
-        return inputStr.equals("0") && currentOperator.equals("/");
+        return isCurrentInputZero() && currentOperator.equals("/");
     }
 
     private  boolean isEqualsPressedWithoutAnInput(String inputStr) {
-        return inputStr.equals("0");
+        return currentOperator.isEmpty();
     }
 
     private boolean isUndefined(String inputStr) {
         return inputStr.equals("DNE");
     }
 
+    private boolean isDecimalExist() {
+        String currentInput = getCurrentInput();
+
+        return currentInput.contains(".");
+    }
+
+    private boolean isCurrentInputZero() {
+        String currentInput = getCurrentInput();
+        return currentInput.equals("0");
+    }
+
     @SuppressLint("DefaultLocale")
     private String formatNumber(double d) {
         if (d == (long) d)
-            return String.format("%d", (int) d);
+            return String.format("%d", (long) d);
         else
             return String.format("%.2f", d);
     }

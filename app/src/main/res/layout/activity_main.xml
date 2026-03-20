@@ -5,311 +5,374 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/color_main_bg"
     tools:context=".MainActivity">
-
 
     <TextView
         android:id="@+id/result"
-        android:layout_width="match_parent"
-        android:layout_height="230dp"
-        android:background="@color/output_color"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:gravity="end|bottom"
-        android:padding="8dp"
+        android:padding="16dp"
         android:text="@string/result_text"
-        android:textColor="@color/grey_color"
-        android:textSize="50sp"
+        android:textColor="@color/color_display_text"
+        android:textSize="46sp"
+        app:layout_constraintVertical_weight="1.5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/input" />
 
     <TextView
         android:id="@+id/input"
-        android:layout_width="match_parent"
-        android:layout_height="140dp"
-        android:background="@color/output_color"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:gravity="end|top"
-        android:padding="3dp"
+        android:padding="16dp"
         android:text="@string/input_text"
-        android:textColor="@color/black"
-        android:textSize="90sp"
+        android:textColor="@color/color_display_text"
+        android:textSize="60sp"
+        android:textStyle="bold"
+        app:layout_constraintVertical_weight="1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/result" />
-
-    <Button
-        android:id="@+id/resetButton"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="2dp"
-        android:backgroundTint="@color/reset_color"
-        android:text="@string/reset_text"
-        android:textColor="@color/black"
-        android:textSize="39sp"
-        app:cornerRadius="0dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input" />
+        app:layout_constraintTop_toBottomOf="@+id/result"
+        app:layout_constraintBottom_toTopOf="@+id/displayCard" />
 
-    <Button
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/displayCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="253dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/resetButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/color_operator_bg"
+        android:text="@string/reset_text"
+        android:textColor="@color/color_operator_text"
+        android:textSize="30sp"
+        app:cornerRadius="32dp"
+        app:layout_constraintVertical_weight="1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/magic"
+        app:layout_constraintTop_toBottomOf="@+id/displayCard"
+        app:layout_constraintBottom_toTopOf="@+id/num7" />
+
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/magic"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="2dp"
-        android:backgroundTint="@color/operator_color"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/color_operator_bg"
         android:text="@string/magic_text"
-        android:textColor="@color/black"
-        android:textSize="50sp"
-        app:cornerRadius="0dp"
+        android:textColor="@color/color_num_text"
+        android:textSize="32sp"
+        app:cornerRadius="32dp"
         app:layout_constraintStart_toEndOf="@+id/resetButton"
-        app:layout_constraintTop_toBottomOf="@+id/input" />
+        app:layout_constraintEnd_toStartOf="@+id/moduloBtn"
+        app:layout_constraintTop_toBottomOf="@+id/displayCard"
+        app:layout_constraintBottom_toTopOf="@+id/num8" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/moduloBtn"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="2dp"
-        android:backgroundTint="@color/operator_color"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/color_operator_bg"
         android:text="@string/moduloOperand_text"
-        android:textColor="@color/black"
-        android:textSize="50sp"
-        app:cornerRadius="0dp"
+        android:textColor="@color/color_num_text"
+        android:textSize="30sp"
+        app:cornerRadius="32dp"
         app:layout_constraintStart_toEndOf="@+id/magic"
-        app:layout_constraintTop_toBottomOf="@+id/input" />
+        app:layout_constraintEnd_toStartOf="@+id/divideBtn"
+        app:layout_constraintTop_toBottomOf="@+id/displayCard"
+        app:layout_constraintBottom_toTopOf="@+id/num9" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/divideBtn"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="2dp"
-        android:backgroundTint="@color/operator_color"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/color_operator_bg"
         android:text="@string/divideOperand_text"
-        android:textColor="@color/black"
-        android:textSize="50sp"
-        app:cornerRadius="0dp"
+        android:textColor="@color/color_operator_text"
+        android:textSize="32sp"
+        app:cornerRadius="32dp"
         app:layout_constraintStart_toEndOf="@+id/moduloBtn"
-        app:layout_constraintTop_toBottomOf="@+id/input" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/displayCard"
+        app:layout_constraintBottom_toTopOf="@+id/multiplyBtn" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/num7"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="2dp"
-        android:backgroundTint="@color/number_color"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/color_num_bg"
         android:insetTop="0dp"
         android:text="@string/num7_text"
-        android:textColor="@color/black"
-        android:textSize="50sp"
-        app:cornerRadius="0dp"
+        android:textColor="@color/color_num_text"
+        android:textSize="32sp"
+        app:cornerRadius="32dp"
+        app:layout_constraintVertical_weight="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/resetButton" />
+        app:layout_constraintEnd_toStartOf="@+id/num8"
+        app:layout_constraintTop_toBottomOf="@+id/resetButton"
+        app:layout_constraintBottom_toTopOf="@+id/num4" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/num8"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="2dp"
-        android:backgroundTint="@color/number_color"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/color_num_bg"
         android:insetTop="0dp"
         android:text="@string/num8_text"
-        android:textColor="@color/black"
-        android:textSize="50sp"
-        app:cornerRadius="0dp"
+        android:textColor="@color/color_num_text"
+        android:textSize="32sp"
+        app:cornerRadius="32dp"
         app:layout_constraintStart_toEndOf="@+id/num7"
-        app:layout_constraintTop_toBottomOf="@+id/magic" />
+        app:layout_constraintEnd_toStartOf="@+id/num9"
+        app:layout_constraintTop_toBottomOf="@+id/magic"
+        app:layout_constraintBottom_toTopOf="@+id/num5" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/num9"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="2dp"
-        android:backgroundTint="@color/number_color"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/color_num_bg"
         android:insetTop="0dp"
         android:text="@string/num9_text"
-        android:textColor="@color/black"
-        android:textSize="50sp"
-        app:cornerRadius="0dp"
+        android:textColor="@color/color_num_text"
+        android:textSize="32sp"
+        app:cornerRadius="32dp"
         app:layout_constraintStart_toEndOf="@+id/num8"
-        app:layout_constraintTop_toBottomOf="@+id/moduloBtn" />
+        app:layout_constraintEnd_toStartOf="@+id/multiplyBtn"
+        app:layout_constraintTop_toBottomOf="@+id/moduloBtn"
+        app:layout_constraintBottom_toTopOf="@+id/num6" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/multiplyBtn"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="2dp"
-        android:backgroundTint="@color/operator_color"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/color_operator_bg"
         android:insetTop="0dp"
         android:text="@string/multiplyOperand_text"
-        android:textColor="@color/black"
-        android:textSize="50sp"
-        app:cornerRadius="0dp"
+        android:textColor="@color/color_operator_text"
+        android:textSize="32sp"
+        app:cornerRadius="32dp"
         app:layout_constraintStart_toEndOf="@+id/num9"
-        app:layout_constraintTop_toBottomOf="@+id/divideBtn" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divideBtn"
+        app:layout_constraintBottom_toTopOf="@+id/subtractBtn" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/num4"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="2dp"
-        android:backgroundTint="@color/number_color"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/color_num_bg"
         android:insetTop="0dp"
         android:text="@string/num4_text"
-        android:textColor="@color/black"
-        android:textSize="50sp"
-        app:cornerRadius="0dp"
+        android:textColor="@color/color_num_text"
+        android:textSize="32sp"
+        app:cornerRadius="32dp"
+        app:layout_constraintVertical_weight="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/num7" />
+        app:layout_constraintEnd_toStartOf="@+id/num5"
+        app:layout_constraintTop_toBottomOf="@+id/num7"
+        app:layout_constraintBottom_toTopOf="@+id/num1" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/num5"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="2dp"
-        android:backgroundTint="@color/number_color"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/color_num_bg"
         android:insetTop="0dp"
         android:text="@string/num5_text"
-        android:textColor="@color/black"
-        android:textSize="50sp"
-        app:cornerRadius="0dp"
+        android:textColor="@color/color_num_text"
+        android:textSize="32sp"
+        app:cornerRadius="32dp"
         app:layout_constraintStart_toEndOf="@+id/num4"
-        app:layout_constraintTop_toBottomOf="@+id/num8" />
+        app:layout_constraintEnd_toStartOf="@+id/num6"
+        app:layout_constraintTop_toBottomOf="@+id/num8"
+        app:layout_constraintBottom_toTopOf="@+id/num2" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/num6"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="2dp"
-        android:backgroundTint="@color/number_color"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/color_num_bg"
         android:insetTop="0dp"
         android:text="@string/num6_text"
-        android:textColor="@color/black"
-        android:textSize="50sp"
-        app:cornerRadius="0dp"
+        android:textColor="@color/color_num_text"
+        android:textSize="32sp"
+        app:cornerRadius="32dp"
         app:layout_constraintStart_toEndOf="@+id/num5"
-        app:layout_constraintTop_toBottomOf="@+id/num9" />
+        app:layout_constraintEnd_toStartOf="@+id/subtractBtn"
+        app:layout_constraintTop_toBottomOf="@+id/num9"
+        app:layout_constraintBottom_toTopOf="@+id/num3" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/subtractBtn"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="2dp"
-        android:backgroundTint="@color/operator_color"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/color_operator_bg"
         android:insetTop="0dp"
         android:text="@string/subtractOperand_text"
-        android:textColor="@color/black"
-        android:textSize="50sp"
-        app:cornerRadius="0dp"
+        android:textColor="@color/color_operator_text"
+        android:textSize="32sp"
+        app:cornerRadius="32dp"
         app:layout_constraintStart_toEndOf="@+id/num6"
-        app:layout_constraintTop_toBottomOf="@+id/multiplyBtn" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/multiplyBtn"
+        app:layout_constraintBottom_toTopOf="@+id/addBtn" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/num1"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="2dp"
-        android:backgroundTint="@color/number_color"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/color_num_bg"
         android:insetTop="0dp"
         android:text="@string/num1_text"
-        android:textColor="@color/black"
-        android:textSize="50sp"
-        app:cornerRadius="0dp"
+        android:textColor="@color/color_num_text"
+        android:textSize="32sp"
+        app:cornerRadius="32dp"
+        app:layout_constraintVertical_weight="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/num4" />
+        app:layout_constraintEnd_toStartOf="@+id/num2"
+        app:layout_constraintTop_toBottomOf="@+id/num4"
+        app:layout_constraintBottom_toTopOf="@+id/num0" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/num2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="2dp"
-        android:backgroundTint="@color/number_color"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/color_num_bg"
         android:insetTop="0dp"
         android:text="@string/num2_text"
-        android:textColor="@color/black"
-        android:textSize="50sp"
-        app:cornerRadius="0dp"
+        android:textColor="@color/color_num_text"
+        android:textSize="32sp"
+        app:cornerRadius="32dp"
         app:layout_constraintStart_toEndOf="@+id/num1"
-        app:layout_constraintTop_toBottomOf="@+id/num5" />
+        app:layout_constraintEnd_toStartOf="@+id/num3"
+        app:layout_constraintTop_toBottomOf="@+id/num5"
+        app:layout_constraintBottom_toTopOf="@+id/dotBtn" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/num3"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="2dp"
-        android:backgroundTint="@color/number_color"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/color_num_bg"
         android:insetTop="0dp"
         android:text="@string/num3_text"
-        android:textColor="@color/black"
-        android:textSize="50sp"
-        app:cornerRadius="0dp"
+        android:textColor="@color/color_num_text"
+        android:textSize="32sp"
+        app:cornerRadius="32dp"
         app:layout_constraintStart_toEndOf="@+id/num2"
-        app:layout_constraintTop_toBottomOf="@+id/num6" />
+        app:layout_constraintEnd_toStartOf="@+id/addBtn"
+        app:layout_constraintTop_toBottomOf="@+id/num6"
+        app:layout_constraintBottom_toTopOf="@+id/removeBtn" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/addBtn"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="2dp"
-        android:backgroundTint="@color/operator_color"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:backgroundTint="@color/color_operator_bg"
         android:insetTop="0dp"
         android:text="@string/addOperand_text"
-        android:textColor="@color/black"
-        android:textSize="50sp"
-        app:cornerRadius="0dp"
+        android:textColor="@color/color_operator_text"
+        android:textSize="32sp"
+        app:cornerRadius="32dp"
         app:layout_constraintStart_toEndOf="@+id/num3"
-        app:layout_constraintTop_toBottomOf="@+id/subtractBtn" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/subtractBtn"
+        app:layout_constraintBottom_toTopOf="@+id/equalBtn" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/num0"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="2dp"
-        android:backgroundTint="@color/number_color"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/color_num_bg"
         android:insetTop="0dp"
         android:text="@string/num0_text"
-        android:textColor="@color/black"
-        android:textSize="50sp"
-        app:cornerRadius="0dp"
+        android:textColor="@color/color_num_text"
+        android:textSize="32sp"
+        app:cornerRadius="32dp"
+        app:layout_constraintVertical_weight="1"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/num1" />
+        app:layout_constraintEnd_toStartOf="@+id/dotBtn"
+        app:layout_constraintTop_toBottomOf="@+id/num1"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/dotBtn"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="2dp"
-        android:backgroundTint="@color/number_color"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/color_num_bg"
         android:insetTop="0dp"
         android:text="@string/dot_text"
-        android:textColor="@color/black"
-        android:textSize="50sp"
-        app:cornerRadius="0dp"
+        android:textColor="@color/color_num_text"
+        android:textSize="32sp"
+        app:cornerRadius="32dp"
         app:layout_constraintStart_toEndOf="@+id/num0"
-        app:layout_constraintTop_toBottomOf="@+id/num2" />
+        app:layout_constraintEnd_toStartOf="@+id/removeBtn"
+        app:layout_constraintTop_toBottomOf="@+id/num2"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/removeBtn"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="2dp"
-        android:backgroundTint="@color/number_color"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/color_num_bg"
         android:insetTop="0dp"
-        android:text="@string/remove_text"
-        android:textColor="@color/black"
-        android:textSize="50sp"
-        app:cornerRadius="0dp"
+        android:text="⌫"
+        android:textColor="@color/color_num_text"
+        android:textSize="32sp"
+        app:cornerRadius="32dp"
         app:layout_constraintStart_toEndOf="@+id/dotBtn"
-        app:layout_constraintTop_toBottomOf="@+id/num3" />
+        app:layout_constraintEnd_toStartOf="@+id/equalBtn"
+        app:layout_constraintTop_toBottomOf="@+id/num3"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/equalBtn"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="2dp"
-        android:backgroundTint="@color/operator_color"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="4dp"
+        android:layout_marginBottom="16dp"
         android:insetTop="0dp"
         android:text="@string/equals_text"
-        android:textColor="@color/black"
-        android:textSize="50sp"
-        app:cornerRadius="0dp"
+        android:textColor="@color/color_equals_text"
+        android:textSize="32sp"
+        app:cornerRadius="32dp"
+        app:backgroundTint="@color/color_equals_bg"
         app:layout_constraintStart_toEndOf="@+id/removeBtn"
-        app:layout_constraintTop_toBottomOf="@+id/addBtn" />
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addBtn"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
