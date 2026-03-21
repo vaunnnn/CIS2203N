@@ -5,13 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.calculatorapp.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,12 +19,30 @@ public class MainActivity extends AppCompatActivity {
     private boolean isEqualsPressed = false;
     private final String lastThreeDigitsOfIDNumber = "4.36";
 
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putDouble("totalKey", runningTotal);
+        outState.putString("operatorKey", currentOperator);
+        outState.putBoolean("firstInputKey", isFirstInput);
+        outState.putBoolean("equalPressedKey", isEqualsPressed);
+        outState.putString("resultText", getCurrentResult());
+        outState.putString("inputText", getCurrentInput());
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        if(savedInstanceState != null) {
+            runningTotal = savedInstanceState.getDouble("totalKey");
+            currentOperator = savedInstanceState.getString("operatorKey");
+            isFirstInput = savedInstanceState.getBoolean("firstInputKey");
+            isEqualsPressed = savedInstanceState.getBoolean("equalPressedKey");
+            setResultText(savedInstanceState.getString("resultText"));
+            setInputText(savedInstanceState.getString("inputText"));
+        }
 
         //Function to handle the number inputs
         View.OnClickListener numberClickListener = view -> {
