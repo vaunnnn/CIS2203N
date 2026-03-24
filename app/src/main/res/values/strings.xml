@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Echo</string>
+    <string name="type_your_message_here">Type your message here</string>
+    <string name="send_message">Send Message</string>
+    <string name="share_message">Share Message</string>
+    <string name="message_will_appear_here">Message will appear here</string>
 </resources>
