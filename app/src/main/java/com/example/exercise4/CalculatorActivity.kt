@@ -11,6 +11,7 @@ class CalculatorActivity : AppCompatActivity() {
     var currentInput = ""
     var firstOperand = 0.0
     var currentOperator = ""
+    val number = currentInput.toDoubleOrNull() ?: 0.0
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -22,4 +23,6 @@ class CalculatorActivity : AppCompatActivity() {
     fun addNumbers(a: Double, b: Double): Double {
         return a + b
     }
+
+
 }
