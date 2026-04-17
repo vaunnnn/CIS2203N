@@ -24,5 +24,15 @@ class CalculatorActivity : AppCompatActivity() {
         return a + b
     }
 
+    fun performMath(operand1: Double, operand2: Double, operator: String): Double {
+        return when (operator) {
+            "+" -> operand1 + operand2
+            "-" -> operand1 - operand2
+            "*" -> operand1 * operand2
+            "/" -> if (operand2 != 0.0) operand1 / operand2 else 0.0 // Basic division by zero check
+            else -> 0.0
+        }
+    }
+
 
 }
