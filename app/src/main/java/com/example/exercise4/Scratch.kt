@@ -1,31 +1,34 @@
 package com.example.exercise4
 
-import kotlin.math.abs
+data class Alien(var name: String?, var age: Int?)
 
-fun alternatingSumWithTwist(numbers: List<Int>): Int {
-    var total = 0
+fun processAliens(aliens: List<Alien>) {
+    for (alien in aliens) {
+        val currentName = alien.name
+        val currentAge = alien.age
 
-    numbers.forEachIndexed { index, number ->
-
-        val processedNumber = if (number % 7 == 0 && number != 0) {
-            abs(number).toString().sumOf { it.digitToInt() }
-        } else {
-            number
+        if (currentName == null && currentAge != null && currentAge % 2 == 0) {
+            alien.name = "Zog-$currentAge"
         }
 
-        if (index % 2 == 0) {
-            total += processedNumber
-        } else {
-            total -= processedNumber
+        if (currentAge == null && currentName != null && currentName.length == 4) {
+            alien.age = currentName[0].code
         }
     }
-
-    return total
 }
 
 fun main() {
-    val testList = listOf(10, 14, 5, 21)
-    val result = alternatingSumWithTwist(testList)
+    val alienList = listOf(
+        Alien(null, 24),
+        Alien(null, 25),
+        Alien("Thor", null),
+        Alien("Bob", null),
+        Alien("Zeno", 50)
+    )
 
-    println("The final alternating sum is: $result")
+    processAliens(alienList)
+
+    for (alien in alienList) {
+        println(alien)
+    }
 }
