@@ -1,34 +1,48 @@
 package com.example.exercise4
 
-data class Alien(var name: String?, var age: Int?)
+fun countPalindromicSubstrings(str: String): Int {
+    var count = 0
+    val len = str.length
 
-fun processAliens(aliens: List<Alien>) {
-    for (alien in aliens) {
-        val currentName = alien.name
-        val currentAge = alien.age
-
-        if (currentName == null && currentAge != null && currentAge % 2 == 0) {
-            alien.name = "Zog-$currentAge"
-        }
-
-        if (currentAge == null && currentName != null && currentName.length == 4) {
-            alien.age = currentName[0].code
+    for (i in 0 until len) {
+        for (j in i + 3..len) {
+            val substring = str.substring(i, j)
+            if (substring == substring.reversed()) {
+                count++
+            }
         }
     }
+    return count
+}
+
+fun sortWithPalindromeWeight(list: List<String>): List<String> {
+    return list.sortedWith(
+        compareByDescending<String> { str ->
+            if (str.isEmpty()) {
+                0.0
+            } else {
+                countPalindromicSubstrings(str).toDouble() / str.length
+            }
+        }.thenByDescending { str ->
+            str.count { it == 'K' }
+        }
+    )
 }
 
 fun main() {
-    val alienList = listOf(
-        Alien(null, 24),
-        Alien(null, 25),
-        Alien("Thor", null),
-        Alien("Bob", null),
-        Alien("Zeno", 50)
+    val words = listOf(
+        "RACECAR",
+        "MADAM",
+        "KAYAK",
+        "KOTLIN",
+        "JAVA"
     )
 
-    processAliens(alienList)
+    val sortedWords = sortWithPalindromeWeight(words)
 
-    for (alien in alienList) {
-        println(alien)
-    }
+    println("Original List:")
+    words.forEach { println(it) }
+
+    println("\nSorted List:")
+    sortedWords.forEach { println(it) }
 }
