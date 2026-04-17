@@ -17,6 +17,9 @@ class CalculatorActivity : AppCompatActivity() {
 
         super.onCreate(savedInstanceState)
 
+    }
 
+    fun addNumbers(a: Double, b: Double): Double {
+        return a + b
     }
 }
