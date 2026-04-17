@@ -1,27 +1,31 @@
 package com.example.exercise4
 
-fun String.vowelShift(): String {
-    if (this.length % 2 == 0) {
-        return this
+import kotlin.math.abs
+
+fun alternatingSumWithTwist(numbers: List<Int>): Int {
+    var total = 0
+
+    numbers.forEachIndexed { index, number ->
+
+        val processedNumber = if (number % 7 == 0 && number != 0) {
+            abs(number).toString().sumOf { it.digitToInt() }
+        } else {
+            number
+        }
+
+        if (index % 2 == 0) {
+            total += processedNumber
+        } else {
+            total -= processedNumber
+        }
     }
-    val regex = Regex("(?i)([bcdfghjklmnpqrstvwxyz])([aeiou])(\\1)")
 
-    return regex.replace(this) { matchResult ->
-        val consonant1 = matchResult.groupValues[1]
-        val vowel = matchResult.groupValues[2].uppercase()
-        val consonant2 = matchResult.groupValues[3]
-
-        val newBlock = "$consonant1$vowel$consonant2"
-
-        "$newBlock$newBlock"
-    }
+    return total
 }
 
 fun main() {
-    val oddString = "radar"
-    val evenString = "raddar"
-    val test1 = "xbabx"
+    val testList = listOf(10, 14, 5, 21)
+    val result = alternatingSumWithTwist(testList)
 
-    println(test1.vowelShift())
-    println(evenString.vowelShift())
+    println("The final alternating sum is: $result")
 }
