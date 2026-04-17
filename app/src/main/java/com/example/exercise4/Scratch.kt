@@ -1,48 +1,35 @@
 package com.example.exercise4
 
-fun countPalindromicSubstrings(str: String): Int {
-    var count = 0
-    val len = str.length
+fun bouncingSequence(start: Long): Sequence<Long> = sequence {
+    var current = start
+    val history = mutableListOf<Long>()
+    var count = 1
 
-    for (i in 0 until len) {
-        for (j in i + 3..len) {
-            val substring = str.substring(i, j)
-            if (substring == substring.reversed()) {
-                count++
-            }
+    while (true) {
+        if (count > 1 && count % 5 == 0) {
+            current = history.sum()
+        } else if (count > 1) {
+            val prev = history.last()
+            current = if (prev % 2 == 0L) prev / 2 else prev * 3 + 1
         }
+
+        history.add(current)
+        if (history.size > 4) {
+            history.removeAt(0)
+        }
+
+        yield(current)
+
+        if (current % 13L == 0L) {
+            break
+        }
+
+        count++
     }
-    return count
-}
-
-fun sortWithPalindromeWeight(list: List<String>): List<String> {
-    return list.sortedWith(
-        compareByDescending<String> { str ->
-            if (str.isEmpty()) {
-                0.0
-            } else {
-                countPalindromicSubstrings(str).toDouble() / str.length
-            }
-        }.thenByDescending { str ->
-            str.count { it == 'K' }
-        }
-    )
 }
 
 fun main() {
-    val words = listOf(
-        "RACECAR",
-        "MADAM",
-        "KAYAK",
-        "KOTLIN",
-        "JAVA"
-    )
+    val mySequence = bouncingSequence(10L)
 
-    val sortedWords = sortWithPalindromeWeight(words)
-
-    println("Original List:")
-    words.forEach { println(it) }
-
-    println("\nSorted List:")
-    sortedWords.forEach { println(it) }
+    println(mySequence.toList())
 }
