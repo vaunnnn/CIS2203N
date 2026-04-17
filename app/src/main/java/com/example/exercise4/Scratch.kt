@@ -1,59 +1,94 @@
 package com.example.exercise4
 
-fun String.countVowels(): Int {
-    return count { it.lowercaseChar() in "aeiou" }
-}
+import kotlinx.coroutines.*
 
-class StateMachine(var currentState: Any) {
+class TimeParadoxException(message: String) : Exception(message)
 
-    inline fun <reified T : Any> transitionTo(newState: T) {
-        val currentName = currentState::class.simpleName ?: ""
-        val targetName = T::class.simpleName ?: ""
+data class GraphJob(
+    val id: String,
+    val dependencies: List<String>,
+    val action: suspend () -> Unit
+)
 
-        val currentVowels = currentName.countVowels()
-        val targetVowels = targetName.countVowels()
+suspend fun executeDependencyGraph(jobs: List<GraphJob>) = coroutineScope {
+    val graph = jobs.associateBy { it.id }
 
-        if (targetVowels > currentVowels) {
-            println("Transition SUCCESS: [$currentName] -> [$targetName]")
-            currentState = newState
-        } else {
-            println("Transition FAILED: [$targetName] ($targetVowels vowels) does NOT have more vowels than [$currentName] ($currentVowels vowels).")
+    val visiting = mutableSetOf<String>()
+    val visited = mutableSetOf<String>()
+
+    fun detectCycle(nodeId: String) {
+        if (visiting.contains(nodeId)) {
+            throw TimeParadoxException("Time Paradox detected! Circular deadlock involving Job: $nodeId")
         }
-    }
-}
+        if (visited.contains(nodeId)) return
 
-class StateMachineBuilder {
-    var initialState: Any? = null
+        visiting.add(nodeId)
 
-    fun build(): StateMachine {
-        requireNotNull(initialState) { "Initial state must be configured!" }
-        return StateMachine(initialState!!)
-    }
-}
+        val node = graph[nodeId] ?: return
+        for (depId in node.dependencies) {
+            detectCycle(depId)
+        }
 
-fun stateMachine(setup: StateMachineBuilder.() -> Unit): StateMachine {
-    val builder = StateMachineBuilder()
-    builder.setup()
-    return builder.build()
-}
-
-class Run
-class Idle
-class Execute
-class Sleep
-
-fun main() {
-    val machine = stateMachine {
-        initialState = Run()
+        visiting.remove(nodeId)
+        visited.add(nodeId)
     }
 
-    println("Starting State: ${machine.currentState::class.simpleName}")
+    for (job in jobs) {
+        detectCycle(job.id)
+    }
 
-    machine.transitionTo(Idle())
+    println("Graph is safe. Launching coroutines...")
+    val deferredJobs = mutableMapOf<String, Deferred<Unit>>()
 
-    machine.transitionTo(Sleep())
+    fun startJob(nodeId: String): Deferred<Unit> {
+        deferredJobs[nodeId]?.let { return it }
 
-    machine.transitionTo(Execute())
+        val deferred = async(start = CoroutineStart.LAZY) {
+            val node = graph[nodeId] ?: return@async
 
-    machine.transitionTo(Run())
+            for (depId in node.dependencies) {
+                startJob(depId).await()
+            }
+
+            node.action()
+        }
+
+        deferredJobs[nodeId] = deferred
+        return deferred
+    }
+
+    val allTasks = jobs.map { startJob(it.id) }
+    allTasks.awaitAll()
+    println("All jobs completed successfully.")
+}
+
+fun main() = runBlocking {
+
+    val safeJobs = listOf(
+        GraphJob("A", emptyList()) {
+            delay(100); println("Job A Done")
+        },
+        GraphJob("B", listOf("A")) {
+            delay(100); println("Job B Done (relied on A)")
+        },
+        GraphJob("C", listOf("A", "B")) {
+            delay(100); println("Job C Done (relied on A & B)")
+        }
+    )
+
+    val deadlockedJobs = listOf(
+        GraphJob("X", listOf("Z")) { println("Job X") },
+        GraphJob("Y", listOf("X")) { println("Job Y") },
+        GraphJob("Z", listOf("Y")) { println("Job Z") }
+    )
+
+    println("--- Testing Safe Graph ---")
+    executeDependencyGraph(safeJobs)
+
+    println("\n--- Testing Deadlocked Graph ---")
+    try {
+        executeDependencyGraph(deadlockedJobs)
+    } catch (e: TimeParadoxException) {
+        println("Caught Exception: ${e.message}")
+    }
 }
