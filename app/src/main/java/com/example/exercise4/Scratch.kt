@@ -1,15 +1,27 @@
 package com.example.exercise4
 
-data class User(val username: String, var score: Int)
+fun String.vowelShift(): String {
+    if (this.length % 2 == 0) {
+        return this
+    }
+    val regex = Regex("(?i)([bcdfghjklmnpqrstvwxyz])([aeiou])(\\1)")
+
+    return regex.replace(this) { matchResult ->
+        val consonant1 = matchResult.groupValues[1]
+        val vowel = matchResult.groupValues[2].uppercase()
+        val consonant2 = matchResult.groupValues[3]
+
+        val newBlock = "$consonant1$vowel$consonant2"
+
+        "$newBlock$newBlock"
+    }
+}
 
 fun main() {
-    val userList = listOf(
-        User("Charles", 1500),
-        User("PlayerTwo", 1200),
-        User("PlayerThree", 950)
-    )
+    val oddString = "radar"
+    val evenString = "raddar"
+    val test1 = "xbabx"
 
-    for (user in userList) {
-        println(user)
-    }
+    println(test1.vowelShift())
+    println(evenString.vowelShift())
 }
