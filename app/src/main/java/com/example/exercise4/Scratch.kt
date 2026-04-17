@@ -1,10 +1,11 @@
 package com.example.exercise4
 
+fun greetUser(name: String): String {
+    return "Hello there, $name! Welcome to Kotlin."
+}
+
 fun main() {
-    val name = "Charles"
-    var age = 21
-
-    age += 1
-
-    println("My name is $name and I will be $age years old next year.")
+    // Calling the function and printing the result
+    val greetingMessage = greetUser("Charles")
+    println(greetingMessage)
 }
