@@ -1,35 +1,45 @@
 package com.example.exercise4
 
-fun bouncingSequence(start: Long): Sequence<Long> = sequence {
-    var current = start
-    val history = mutableListOf<Long>()
-    var count = 1
+fun chronoDecoder(input: String): Map<Char, Int> {
+    if (input.isBlank()) return emptyMap()
+    val regex = Regex("([A-Z])([+\\-*/])(\\d+)")
 
-    while (true) {
-        if (count > 1 && count % 5 == 0) {
-            current = history.sum()
-        } else if (count > 1) {
-            val prev = history.last()
-            current = if (prev % 2 == 0L) prev / 2 else prev * 3 + 1
+    val operations = input.split(",").mapNotNull { part ->
+        val match = regex.find(part.trim())
+        if (match != null) {
+            val (variable, operator, operand) = match.destructured
+            Triple(variable[0], operator[0], operand.toInt())
+        } else {
+            null
         }
-
-        history.add(current)
-        if (history.size > 4) {
-            history.removeAt(0)
-        }
-
-        yield(current)
-
-        if (current % 13L == 0L) {
-            break
-        }
-
-        count++
     }
+
+    val sortedOperations = operations.sortedBy { it.first }
+
+    val finalValues = mutableMapOf<Char, Int>()
+
+    for ((variable, operator, operand) in sortedOperations) {
+        val currentValue = finalValues.getOrDefault(variable, 1)
+
+        val newValue = when (operator) {
+            '+' -> currentValue + operand
+            '-' -> currentValue - operand
+            '*' -> currentValue * operand
+            '/' -> currentValue / operand
+            else -> currentValue
+        }
+
+        finalValues[variable] = newValue
+    }
+
+    return finalValues
 }
 
 fun main() {
-    val mySequence = bouncingSequence(10L)
 
-    println(mySequence.toList())
+    val testString = "A+3, C-2, B*2"
+    val result = chronoDecoder(testString)
+
+    println("Original String: $testString")
+    println("Decoded Map: $result")
 }
